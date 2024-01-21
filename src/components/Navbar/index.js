@@ -1,7 +1,7 @@
 'use client';
 import React from 'react'
 
-const isAuthUser = true;
+const isAuthUser = false;
 const user = {
   role: 'admin'
 }
@@ -100,7 +100,7 @@ const Navbar = () => {
               </ul>
             </div>
             <div className="navbar-end">
-              <a className="btn">Button</a>
+              <a className="btn">Logout</a>
             </div>
           </div>
 
@@ -172,8 +172,9 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            <div className="navbar-end">
-              <a className="btn">Button</a>
+            <div className="navbar-end flex gap-2">
+              <a className="btn bg-black text-white">Sign up</a>
+              <a className="btn">Log in</a>
             </div>
           </div>
       }
