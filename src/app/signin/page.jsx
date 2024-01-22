@@ -1,9 +1,26 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import { FcGoogle } from "react-icons/fc";
+import { UserAuth } from '@/app/context/AuthContext';
+import { Router, Route, Routes, BrowserRouter } from 'react-router'
+import { Navigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 
 
 
 const signInPage = () => {
+
+    const { user, googleSignIn } = UserAuth();
+    const [loading, setLoading] = useState(true)
+    const router = useRouter();
+
+    const handleSignIn = async () => {
+        try {
+            await googleSignIn();
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div>
             {/* <!--
@@ -57,13 +74,31 @@ const signInPage = () => {
 
                         <div>
                             <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-                            <div class="inline-flex items-center justify-center w-full">
-                                <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-                                <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">or</span>
-                            </div>
-                            <p className='mt-6 text-4xl bg-[#50d71e] rounded-md w-1/2'><FcGoogle /></p>
                         </div>
                     </form>
+
+                    {/* Horizontal line */}
+                    <div class="inline-flex items-center justify-center w-full">
+                        <hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+                        <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">or</span>
+                    </div>
+
+                    {!user ? (
+                        <button className="btn" onClick={handleSignIn}>
+                            <svg onClick={handleSignIn} href='/' xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-xl" fill="none" viewBox="0 0 24 24" stroke="currentColor"><FcGoogle /></svg>
+                            Sign in with Google
+                        </button>) : (
+                            router.push('/')
+
+
+                    )}
+
+                    {/* <button className="btn" onClick={handleSignIn}>
+                        <svg onClick={handleSignIn} href='/' xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-xl" fill="none" viewBox="0 0 24 24" stroke="currentColor"><FcGoogle /></svg>
+                        Sign in with Google
+                    </button> */}
+
+                    {/* <a className="btn" onClick={handleSignIn} >Log in</a> */}
 
                     <p class="mt-10 text-center text-sm text-gray-500">
                         Not a member?
