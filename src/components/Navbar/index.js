@@ -125,7 +125,7 @@ const Navbar = () => {
             {!user ? null : (
                 <li>
                   <details>
-                    <summary>My Purchase</summary>
+                    <summary>My Purchase </summary>
                     <ul className="p-2">
                       <li><a href='/mypurchase'>Learnings</a></li>
                       <li><a>Services</a></li>
