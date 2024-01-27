@@ -3,17 +3,13 @@ import { UserAuth } from '@/app/context/AuthContext';
 import React, { useEffect, useState } from 'react';
 
 
-const isAuthUser = false;
-const user = {
-  role: 'admin'
-}
-
 const Navbar = () => {
 
   const { user, googleSignIn, logout } = UserAuth();
   const [loading, setLoading] = useState(true)
 
   // console.log(user);
+  // console.log(user.displayName);
 
   const handleSignIn = async () => {
     try {
@@ -132,6 +128,10 @@ const Navbar = () => {
                     </ul>
                   </details>
                 </li>)}
+            {!user ? null : (
+              <li><a href='/profile'>My Profile</a></li>
+             )}
+                
           
           </ul>
         </div>
